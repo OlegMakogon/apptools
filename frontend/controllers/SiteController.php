@@ -14,6 +14,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+use common\components\AppTools;
+
 /**
  * Site controller
  */
@@ -27,24 +29,25 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                //'only' => ['logout', 'signup','update-sources'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+//                        'actions' => ['signup'],
                         'allow' => true,
-                        'roles' => ['?'],
+//                        'roles' => ['?'],
                     ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+//                    [
+//                        'actions' => ['index','logout','update-sources'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['get', 'post'],
+                    'update-sources' => ['get'],
                 ],
             ],
         ];
@@ -218,8 +221,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSyncSources()
+    public function actionUpdateSources()
     {
-        return $this->render('syncSources');
+        $paramsGet = $_GET;
+        $yiiGet = Yii::$app->request->get();
+
+        $result = AppTools::updateSources($branch);
+
+        return $this->render('updateSources',[
+            'result' => $result,
+        ]);
     }
 }

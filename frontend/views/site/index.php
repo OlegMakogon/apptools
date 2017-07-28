@@ -33,9 +33,9 @@ $branches = $model->get();
                             <td><span class="badge bg-green"><?= $branch['path'] ?></span></td>
                             <td><?= $branch['description'] ?></td>
                             <td>
-                                <?= Html::a('<span class="fa fa-code"></span>', ['sync-sources'],
+                                <?= Html::a('<span class="fa fa-code"></span>', ['site/update-sources',['branch'=>111]],
                                     ['title' => "Sync sources"]) ?>
-                                <?= Html::a('<span class="fa fa-database"></span>', ['apply-migration'],
+                                <?= Html::a('<span class="fa fa-database"></span>', ['apply-migration',['branch'=>$branch['path']]],
                                     ['title' => "Apply migration"]) ?>
                             </td>
                         </tr>
