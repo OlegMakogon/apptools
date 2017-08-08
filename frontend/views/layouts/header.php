@@ -17,6 +17,16 @@ use yii\helpers\Html;
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <?php if (Yii::$app->user->isGuest) : ?>
+                    <li class="">
+                        <a href="#" class=""><?= Yii::t('app','Login') ?></a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="">
+                            <i class="fa fa-user-register"></i>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

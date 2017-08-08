@@ -14,8 +14,6 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
-use common\components\AppTools;
-
 /**
  * Site controller
  */
@@ -218,18 +216,6 @@ class SiteController extends Controller
 
         return $this->render('resetPassword', [
             'model' => $model,
-        ]);
-    }
-
-    public function actionUpdateSources()
-    {
-        $paramsGet = $_GET;
-        $yiiGet = Yii::$app->request->get();
-
-        $result = AppTools::updateSources($branch);
-
-        return $this->render('updateSources',[
-            'result' => $result,
         ]);
     }
 }

@@ -3,20 +3,42 @@
 namespace common\components;
 
 
+use common\models\Branch;
+
 class AppTools
 {
-    static public function updateSources($branchPath)
+    static public function updateSources(Branch $branch)
     {
         $result = [
             'output' => '',
             'success' => false,
         ];
 
-        if (is_dir($branchPath)) {
-            $cmd = sprintf("cd %s && git pull --rebase",$branchPath);
-            $result['output'] = static::processCommand($cmd);
+        if (is_dir($branch->directory)) {
+            $cmd = sprintf("cd %s && git pull --rebase",$branch->directory);
+            $result['output'] = static::processCommand($cmd . " 2>&1");
             if (strpos($result['output'],'up-to-date') !== false) {
                 $result['success'] = true;
+            }
+        }
+
+        return $result;
+    }
+
+    static public function applyMigrations(Branch $branch)
+    {
+        $result = [
+            'output' => '',
+            'success' => true,
+        ];
+
+        if (is_dir($branch->directory)) {
+            $cmd = sprintf("cd %s && %s migrate",$branch->directory,$branch->yii_path);
+            $result['output'] = static::processCommand($cmd . " 2>&1");
+            if (strpos($result['output'],'error') !== false) {
+                $result['success'] = false;
+            } elseif (strpos($result['output'],'No such file or directory') !== false) {
+                $result['success'] = false;
             }
         }
 
@@ -31,6 +53,8 @@ class AppTools
         {
             $output .= fread($proc, 4096);
         }
+
+        $output = str_replace("\n","<br>",$output);
 
         return $output;
     }

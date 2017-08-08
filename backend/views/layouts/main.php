@@ -41,6 +41,12 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+
+        if (YII_ENV == 'dev') {
+            $menuItems[] = ['label' => Yii::t('app', 'Gii'), 'icon' => 'dashboard', 'url' => ['/gii']];
+            $menuItems[] = ['label' => Yii::t('app', 'Debug'), 'icon' => 'bug', 'url' => ['/debug']];
+        }
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -50,6 +56,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

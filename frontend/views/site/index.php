@@ -13,7 +13,7 @@ $branches = $model->get();
     <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Branches</h3>
+                <h3 class="box-title"><?= Yii::t('app','Branches') ?></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -21,10 +21,10 @@ $branches = $model->get();
                     <tbody>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>Name</th>
-                        <th>Path</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th><?= Yii::t('app','Name') ?></th>
+                        <th><?= Yii::t('app','Path') ?></th>
+                        <th><?= Yii::t('app','Description') ?></th>
+                        <th><?= Yii::t('app','Action') ?></th>
                     </tr>
                     <?php foreach ($branches as $id => $branch) : ?>
                         <tr>
@@ -33,10 +33,10 @@ $branches = $model->get();
                             <td><span class="badge bg-green"><?= $branch['path'] ?></span></td>
                             <td><?= $branch['description'] ?></td>
                             <td>
-                                <?= Html::a('<span class="fa fa-code"></span>', ['site/update-sources',['branch'=>111]],
+                                <?= Html::a('<span class="fa fa-code"></span>', ['site/update-sources','branch'=>$branch['path']],
                                     ['title' => "Sync sources"]) ?>
-                                <?= Html::a('<span class="fa fa-database"></span>', ['apply-migration',['branch'=>$branch['path']]],
-                                    ['title' => "Apply migration"]) ?>
+                                <?= Html::a('<span class="fa fa-database"></span>', ['apply-migrations','branch'=>$branch['path']],
+                                    ['title' => "Apply migrations"]) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
