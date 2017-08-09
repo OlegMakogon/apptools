@@ -29,12 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
             'name',
             'description',
             'directory',
             'yii_path',
-            'state',
             'created_at',
             'updated_at',
         ],

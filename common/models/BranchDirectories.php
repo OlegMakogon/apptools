@@ -23,10 +23,20 @@ class BranchDirectories
             }
         }
 
-        $savedBranches = Branch::find()->all();
-        if (count($savedBranches) === 0) {
-            $this->updateBranchTable($directories);
+        // get saved branches (directories)
+        $userId = Yii::$app->user->id;
+        $savedBranches = Branch::find()->select('directory')->where(['user_id' => $userId])->column();
+
+        // exclude saved directories
+        $dirs = [];
+        foreach ($directories as $directory) {
+            if (!in_array($directory,$savedBranches)) {
+                $dirs[] = $directory;
+            }
         }
+
+        // save new directories
+        $this->updateBranchTable($dirs);
 
         return $directories;
     }
@@ -47,8 +57,19 @@ class BranchDirectories
 
     protected function findYiiTool($dir)
     {
+        $result = false;
+        // default approach
         $yiiTool = $dir . '/yii';
+        if (file_exists($yiiTool)) {
+            $result = $yiiTool;
+        } else {
+            // bitool approach
+            $yiiTool = $dir . '/_protected/yii';
+            if (file_exists($yiiTool)) {
+                $result = $yiiTool;
+            }
+        }
 
-        return (file_exists($yiiTool)) ? $dir . '/yii' : false;
+        return $result;
     }
 }

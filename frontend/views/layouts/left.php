@@ -11,8 +11,8 @@ use yii\helpers\Html;
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Logout', 'url' => ['site/logout'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Projects', 'url' => ['branch/index'], 'visible' => !Yii::$app->user->isGuest, 'icon' => 'git'],
+                    ['label' => 'Re-scan', 'url' => ['branch/scan'], 'visible' => !Yii::$app->user->isGuest, 'icon' => 'search'],
                 ],
             ]
         ) ?>

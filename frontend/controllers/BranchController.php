@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 use common\models\Branch;
 use common\models\BranchDirectories;
@@ -23,6 +24,15 @@ class BranchController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -152,5 +162,13 @@ class BranchController extends Controller
             'operationName' => Yii::t('app','Apply migrations'),
             'result' => $result,
         ]);
+    }
+
+    public function actionScan()
+    {
+        $branchDirecotries = new BranchDirectories();
+        $branchDirecotries->scan();
+
+        $this->redirect(['branch/index']);
     }
 }

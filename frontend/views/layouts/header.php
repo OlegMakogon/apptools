@@ -7,7 +7,8 @@ use yii\helpers\Html;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>',
+        Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -15,16 +16,32 @@ use yii\helpers\Html;
             <span class="sr-only">Toggle navigation</span>
         </a>
 
+        <style>
+            .logout {
+                color: #b8c7ce;
+            }
+            .logout:hover {
+                color: white;
+            }
+        </style>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <?php if (Yii::$app->user->isGuest) : ?>
-                    <li class="">
-                        <a href="#" class=""><?= Yii::t('app','Login') ?></a>
+                    <li>
+                        <?= Html::a(Yii::t('app', 'Signup'),
+                            ['site/signup'],
+                            ['title' => Yii::t('app', 'Signup')]); ?>
                     </li>
-                    <li class="">
-                        <a href="#" class="">
-                            <i class="fa fa-user-register"></i>
-                        </a>
+                    <li>
+                        <?= Html::a(Yii::t('app', 'Login'),
+                            ['site/login'],
+                            ['title' => Yii::t('app', 'Login')]); ?>
+                    </li>
+                <?php else : ?>
+                    <li>
+                        <?= Html::a(Yii::t('app', 'Logout'),
+                            ['site/logout'],
+                            ['title' => Yii::t('app', 'Logout')]); ?>
                     </li>
                 <?php endif; ?>
             </ul>

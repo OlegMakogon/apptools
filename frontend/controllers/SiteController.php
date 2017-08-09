@@ -1,13 +1,13 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\BranchDirectories;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -27,18 +27,18 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                //'only' => ['logout', 'signup','update-sources'],
+                'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-//                        'actions' => ['signup'],
+                        'actions' => ['signup'],
                         'allow' => true,
-//                        'roles' => ['?'],
+                        'roles' => ['?'],
                     ],
-//                    [
-//                        'actions' => ['index','logout','update-sources'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
+                    [
+                        'actions' => ['index','logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
             'verbs' => [
@@ -74,11 +74,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = new BranchDirectories();
-
-        return $this->render('index', [
-            'model' => $model
-        ]);
+        return $this->render('index');
     }
 
     /**

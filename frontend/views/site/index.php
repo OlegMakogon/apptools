@@ -6,46 +6,36 @@ use yii\helpers\Html;
 
 $this->title = '';
 
-$branches = $model->get();
-
 ?>
-<div class="row">
-    <div class="col-md-12">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title"><?= Yii::t('app','Branches') ?></h3>
+<article>
+    <header class="content-header container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="content-max-width">AppTools</h1>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table class="table table-bordered">
-                    <tbody>
-                    <tr>
-                        <th style="width: 10px">#</th>
-                        <th><?= Yii::t('app','Name') ?></th>
-                        <th><?= Yii::t('app','Path') ?></th>
-                        <th><?= Yii::t('app','Description') ?></th>
-                        <th><?= Yii::t('app','Action') ?></th>
-                    </tr>
-                    <?php foreach ($branches as $id => $branch) : ?>
-                        <tr>
-                            <td><?= $id + 1 ?></td>
-                            <td><?= $branch['name'] ?></td>
-                            <td><span class="badge bg-green"><?= $branch['path'] ?></span></td>
-                            <td><?= $branch['description'] ?></td>
-                            <td>
-                                <?= Html::a('<span class="fa fa-code"></span>', ['site/update-sources','branch'=>$branch['path']],
-                                    ['title' => "Sync sources"]) ?>
-                                <?= Html::a('<span class="fa fa-database"></span>', ['apply-migrations','branch'=>$branch['path']],
-                                    ['title' => "Apply migrations"]) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
+        </div>
+    </header>
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <section class="content-max-width">
+                    <section id="howto">
+                        <p>
+                            The default account is admin/admin. After authorization, the application will scan the list of your sites.
+                        </p>
+                        <h3>Current functionality:</h3>
+                        <ul>
+                            <li>Automatic scanning and the formation of a list of projects.</li>
+                            <li>Ability to re-scan the list of projects.</li>
+                            <li>Ability to edit the list of projects.</li>
+                            <li>Update the source code of the project.</li>
+                            <li>Apply migrations to the project.</li>
+                            <li>Additional information fields.</li>
+                            <li>Support for multiple accounts.</li>
+                        </ul>
+                    </section>
+                </section>
             </div>
         </div>
     </div>
-</div>
+</article>

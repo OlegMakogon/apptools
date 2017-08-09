@@ -1,6 +1,7 @@
 <?php
 
 $this->title = $operationName;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Branches'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 if (!$result['success']) {

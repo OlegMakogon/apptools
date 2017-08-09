@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Branches');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="row">
@@ -26,12 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['class' => 'yii\grid\SerialColumn'],
 
                         'id',
-                        'user_id',
                         'name',
                         'description',
                         'directory',
-                        // 'yii_path',
-                        // 'state',
+                         'yii_path',
                         // 'created_at',
                         // 'updated_at',
 

@@ -57,6 +57,8 @@ class BranchSearch extends Branch
             return $dataProvider;
         }
 
+        $this->user_id = Yii::$app->user->id;
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
