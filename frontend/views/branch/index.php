@@ -10,6 +10,12 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Branches');
 $this->params['breadcrumbs'][] = $this->title;
 
+$script = "
+    $('.loading').on('click',function () {
+        $('.box').append('<div class=\"overlay\"><i class=\"fa fa-refresh fa-spin\"></i></div>');
+    });
+";
+$this->registerJs($script);
 ?>
 
 <div class="row">
@@ -40,11 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{view} {update} {delete} {sync-sources} {apply-migrations}',
                             'buttons' => [
                                 'sync-sources' => function ($url, $model, $key) {     // render sync-sources button
-                                    return Html::a('<span class="fa fa-code"></span>',
+                                    return Html::a('<span class="fa fa-code loading"></span>',
                                         ['branch/update-sources','branch'=>$model->id],['title' => Yii::t('app','Sync sources')]);
                                 },
                                 'apply-migrations' => function ($url, $model, $key) {     // render apply-migrations button
-                                    return Html::a('<span class="fa fa-database"></span>',
+                                    return Html::a('<span class="fa fa-database loading"></span>',
                                         ['branch/apply-migrations','branch'=>$model->id],['title' => Yii::t('app','Apply migrations')]);
                                 },
                             ],
