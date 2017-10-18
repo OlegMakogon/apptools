@@ -164,6 +164,17 @@ class BranchController extends Controller
         ]);
     }
 
+    public function actionFetchUnversioned($branch)
+    {
+        $branchObj = Branch::findOne(['id'=>$branch]);
+        $result = AppTools::fetchUnversioned($branchObj);
+
+        return $this->render('showOutput', [
+            'operationName' => Yii::t('app','Fetch unversioned'),
+            'result' => $result,
+        ]);
+    }
+
     public function actionScan()
     {
         $branchDirecotries = new BranchDirectories();

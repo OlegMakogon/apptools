@@ -13,6 +13,23 @@ use yii\helpers\Html;
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
                     ['label' => 'Projects', 'url' => ['branch/index'], 'visible' => !Yii::$app->user->isGuest, 'icon' => 'git'],
                     ['label' => 'Re-scan', 'url' => ['branch/scan'], 'visible' => !Yii::$app->user->isGuest, 'icon' => 'search'],
+                    [
+                        'label' => 'Tools',
+                        'icon' => 'gears',
+                        'url' => '#',
+                        'items' => [
+                            [
+                                'label' => 'Vagrant Box',
+                                'icon' => 'dropbox',
+                                'url' => '#',
+                                'items' => [
+                                    ['label' => 'Version', 'icon' => 'code-fork', 'url' => ['vagrant-box/version'],],
+                                    ['label' => 'Update', 'icon' => 'download', 'url' => ['vagrant-box/update'],],
+                                ],
+                            ],
+                            ['label' => 'Self update', 'icon' => 'refresh', 'url' => ['site/self-update'],],
+                        ],
+                    ],
                 ],
             ]
         ) ?>

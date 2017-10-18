@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 use common\models\LoginForm;
+use common\components\AppTools;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -214,4 +215,15 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionSelfUpdate()
+    {
+        $result = AppTools::selfUpdate();
+
+        return $this->render('showOutput', [
+            'operationName' => Yii::t('app','Self update'),
+            'result' => $result,
+        ]);
+    }
+
 }
