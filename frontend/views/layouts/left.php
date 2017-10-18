@@ -18,15 +18,17 @@ use yii\helpers\Html;
                         'icon' => 'gears',
                         'url' => '#',
                         'items' => [
-                            [
-                                'label' => 'Vagrant Box',
-                                'icon' => 'dropbox',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Version', 'icon' => 'code-fork', 'url' => ['vagrant-box/version'],],
-                                    ['label' => 'Update', 'icon' => 'download', 'url' => ['vagrant-box/update'],],
-                                ],
-                            ],
+//                            [
+//                                'label' => 'Vagrant Box',
+//                                'icon' => 'dropbox',
+//                                'url' => '#',
+//                                'items' => [
+//                                    ['label' => 'Version', 'icon' => 'code-fork', 'url' => ['vagrant-box/version'],],
+//                                    ['label' => 'Update', 'icon' => 'download', 'url' => ['vagrant-box/update'],],
+//                                ],
+//                            ],
+                            ['label' => 'Box Version', 'icon' => 'code-fork', 'url' => ['vagrant-box/version'],],
+                            ['label' => 'Box Update', 'icon' => 'download', 'url' => ['vagrant-box/update'],],
                             ['label' => 'Self update', 'icon' => 'refresh', 'url' => ['site/self-update'],],
                         ],
                     ],
