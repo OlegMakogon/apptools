@@ -17,6 +17,7 @@ use yii\helpers\Html;
                         'label' => 'Tools',
                         'icon' => 'gears',
                         'url' => '#',
+                        'visible' => !Yii::$app->user->isGuest,
                         'items' => [
 //                            [
 //                                'label' => 'Vagrant Box',
