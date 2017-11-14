@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use common\components\AppTools;
@@ -11,6 +12,9 @@ use Yii;
  */
 class VagrantBox
 {
+    const CONSOLE_MODE = 1;
+    const WEB_MODE = 2;
+
     protected $localRegistryName;
     protected $remoteRegistryName;
     protected $rootScripts = [];
@@ -47,7 +51,7 @@ class VagrantBox
         return $version;
     }
 
-    public function update()
+    public function update($mode = self::WEB_MODE)
     {
         $result = [
             'output' => '',
@@ -66,12 +70,19 @@ class VagrantBox
 
         if (count($diffRegistry)) {
 
-            $resUpdate = AppTools::runUpdate();
+            $resUpdate = AppTools::runUpdate(AppTools::APACHE_MODE);
             $result['output'] .= $resUpdate['output'];
+
+            if ($mode == self::CONSOLE_MODE) {
+
+                $resUpdate = AppTools::runUpdate(AppTools::ROOT_MODE);
+                $result['output'] .= $resUpdate['output'];
+
+            }
 
             $result['output'] .= $this->updateLocalRegistry();
 
-            if (count($this->rootScripts)) {
+            if (($mode == self::WEB_MODE) and count($this->rootScripts)) {
                 $result['output'] .= "<font color='red'><b>Run \"vagrant reload\" to update vagrant box.</b></font>";
             }
 

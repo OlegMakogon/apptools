@@ -7,6 +7,9 @@ use common\models\Branch;
 
 class AppTools
 {
+    const ROOT_MODE = 1;
+    const APACHE_MODE = 2;
+
     static public function updateSources(Branch $branch)
     {
         $result = [
@@ -91,18 +94,26 @@ class AppTools
         return $result;
     }
 
-    static public function runUpdate()
+    static public function runUpdate($mode = self::APACHE_MODE)
     {
         $result = [
             'output' => '',
             'success' => true,
         ];
 
-        $cmd = "bash /vagrant/provision/updateboxa.sh";
+        if ($mode == self::ROOT_MODE) {
+
+            $cmd = sprintf("bash %s/%s/updatebox.sh", Yii::$app->params['vagrantRootFolder'],
+                Yii::$app->params['vagrantProvisionFolder']);
+
+        } else {
+
+            $cmd = sprintf("bash %s/%s/updateboxa.sh", Yii::$app->params['vagrantRootFolder'],
+                Yii::$app->params['vagrantProvisionFolder']);
+
+        }
+
         $result['output'] = static::processCommand($cmd . " 2>&1");
-//        if (strpos($result['output'], 'error') !== false) {
-//            $result['success'] = false;
-//        }
 
         return $result;
     }
