@@ -74,6 +74,29 @@ class AppTools
         return $result;
     }
 
+    static public function fixCrm(Branch $branch)
+    {
+        $result = [
+            'output' => '',
+            'success' => true,
+        ];
+
+        if (is_dir($branch->directory)) {
+
+            $cmd = sprintf("php %sconsole/fixcrm.php %s", Yii::$app->params['appToolsFolder'], $branch->directory);
+
+            $result['output'] = static::processCommand($cmd . " 2>&1");
+            if (strpos($result['output'], 'error') !== false) {
+                $result['success'] = false;
+            }
+            if (empty($result['output'])) {
+                $result['output'] = "Done";
+            }
+        }
+
+        return $result;
+    }
+
     static public function selfUpdate()
     {
         $result = [

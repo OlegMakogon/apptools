@@ -43,7 +43,7 @@ $this->registerJs($script);
                         [
                             'class' => 'yii\grid\ActionColumn',
 
-                            'template' => '{view} {update} {delete} {sync-sources} {apply-migrations} {fetch-unversioned}',
+                            'template' => '{view} {update} {delete} {sync-sources} {apply-migrations} {fetch-unversioned} {fix-crm}',
                             'buttons' => [
                                 'sync-sources' => function ($url, $model, $key) {     // render sync-sources button
                                     return Html::a('<span class="fa fa-code loading"></span>',
@@ -56,6 +56,10 @@ $this->registerJs($script);
                                 'fetch-unversioned' => function ($url, $model, $key) {     // render fetch-unversioned button
                                     return Html::a('<span class="fa fa-download loading"></span>',
                                         ['branch/fetch-unversioned','branch'=>$model->id],['title' => Yii::t('app','Fetch unversioned files')]);
+                                },
+                                'fix-crm' => function ($url, $model, $key) {     // render fix-crm button
+                                    return Html::a('<span class="fa fa-gears loading"></span>',
+                                        ['branch/fix-crm','branch'=>$model->id],['title' => Yii::t('app','Fix CRM issue')]);
                                 },
                             ],
                         ],

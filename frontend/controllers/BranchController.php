@@ -175,6 +175,17 @@ class BranchController extends Controller
         ]);
     }
 
+    public function actionFixCrm($branch)
+    {
+        $branchObj = Branch::findOne(['id'=>$branch]);
+        $result = AppTools::fixCrm($branchObj);
+
+        return $this->render('showOutput', [
+            'operationName' => Yii::t('app','Fixing CRM'),
+            'result' => $result,
+        ]);
+    }
+
     public function actionScan()
     {
         $branchDirecotries = new BranchDirectories();
